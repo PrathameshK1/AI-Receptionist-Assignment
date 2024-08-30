@@ -1,0 +1,10 @@
+streamlit
+python-dotenv
+google-generativeai
+requests
+transformers
+rouge-score
+pathlib
+torch
+sentencepiece 
+numpy
