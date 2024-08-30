@@ -79,7 +79,7 @@ def main():
             # Simulate delay for emergency response lookup
             if any(keyword in user_input.lower() for keyword in emergency_responses.keys()):
                 time.sleep(15)
-            
+            #Aritificial delay of 15 seconds for emergency response 
             ai_response = get_gemini_response(
                 str(st.session_state.conversation_history),
                 user_input,
