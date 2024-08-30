@@ -30,17 +30,22 @@ You are an AI receptionist for Dr. Adrin. Your task is to handle emergency calls
 
 Always maintain a caring and professional tone. Your primary goal is to assist in emergencies and ensure messages are properly handled.
 
+Emergency responses available:
+{emergency_responses}
+
 Current conversation:
 {conversation_history}
 
 User: {user_input}
 AI Receptionist:"""
 
-def get_gemini_response(conversation_history, user_input):
+def get_gemini_response(conversation_history, user_input, emergency_responses):
     model = genai.GenerativeModel("gemini-pro")
     response = model.generate_content(
         AI_RECEPTIONIST_PROMPT.format(
-            conversation_history=conversation_history, user_input=user_input
+            emergency_responses=emergency_responses,
+            conversation_history=conversation_history,
+            user_input=user_input
         )
     )
     return response.text
@@ -77,7 +82,8 @@ def main():
             
             ai_response = get_gemini_response(
                 str(st.session_state.conversation_history),
-                user_input
+                user_input,
+                emergency_responses
             )
             st.session_state.conversation_history.append({"role": "assistant", "content": ai_response})
             st.session_state.waiting_for_response = False
